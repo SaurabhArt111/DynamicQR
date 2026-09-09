@@ -165,7 +165,7 @@
     border: 10px solid var(--text);
     border-radius: 42px;
     background: var(--surface);
-    box-shadow: 0 35px 80px rgba(0, 0, 0, .2);
+    box-shadow: 0 35px 80px var(--shadow);
     position: relative;
     z-index: 2;
     transform: rotate(4deg);
@@ -210,34 +210,16 @@
     height: 150px;
     margin: 12px auto;
     border-radius: 18px;
-    background: repeating-conic-gradient(var(--text) 0 25%, transparent 0 50%) 50%/16px 16px;
+    background: var(--surface);
     position: relative;
     border: 10px solid var(--surface)
 }
 
-.mini-qr span {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    border: 7px solid var(--surface);
-    background: var(--text);
-    box-shadow: 0 0 0 4px var(--surface);
-    border-radius: 4px
-}
-
-.mini-qr span:nth-child(1) {
-    top: 8px;
-    left: 8px
-}
-
-.mini-qr span:nth-child(2) {
-    top: 8px;
-    right: 8px
-}
-
-.mini-qr span:nth-child(3) {
-    bottom: 8px;
-    left: 8px
+.mini-qr img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated
 }
 
 .phone-screen>strong {
@@ -309,7 +291,7 @@
 
 .orbit-a {
     width: 470px;
-    height: 470px
+    height: 470px;
 }
 
 .orbit-b {
