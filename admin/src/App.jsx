@@ -12,9 +12,9 @@ const nav = [
   { to: routes.modules, label: 'Modules', icon: Grid2X2 },
   { to: routes.collections, label: 'Collections', icon: FolderOpen },
   { to: routes.qrcodes, label: 'QR Codes', icon: QrCode },
-  { to: routes.files, label: 'Uploads', icon: Files },
+  { to: routes.settings, label: 'Settings', icon: Settings },
   { to: routes.recycleBin, label: 'Recycle Bin', icon: Recycle },
-  { to: routes.settings, label: 'Settings', icon: Settings }
+  { to: routes.files, label: 'Uploads', icon: Files }
 ];
 
 export default function App() {
@@ -30,7 +30,6 @@ export default function App() {
       <aside className={`sidebar ${open ? 'open' : ''}`}>
         <div className="sidebar-head">
           <div className="brand"><span className="brand-mark"><QrCode size={19} /></span><span>{appName}</span></div>
-          <button className="icon-button mobile-close" onClick={() => setOpen(false)} aria-label="Close navigation"><X size={18}/></button>
         </div>
         <div className="workspace-card"><span className="workspace-dot"/><div><strong>Admin workspace</strong><small>{admin?.email || 'Control center'}</small></div></div>
         <nav className="nav-links desktop-nav">
