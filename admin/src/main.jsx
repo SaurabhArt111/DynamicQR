@@ -25,7 +25,6 @@ import './styles/global.css';
 // the admin dashboard (the Design QR Code studio, ZIP/PDF export, etc.)
 // just to show someone their files.
 const Login = lazy(() => import('./pages/Login.jsx'));
-const Landing = lazy(() => import('./pages/Landing.jsx'));
 const Dashboard = lazy(() => import('./pages/Dashboard.jsx'));
 const Collections = lazy(() => import('./pages/Collections.jsx'));
 const CollectionDetail = lazy(() => import('./pages/CollectionDetail.jsx'));
@@ -33,7 +32,8 @@ const QRCodes = lazy(() => import('./pages/QRCodes.jsx'));
 const QRDetail = lazy(() => import('./pages/QRDetail.jsx'));
 const RecycleBin = lazy(() => import('./pages/RecycleBin.jsx'));
 const Settings = lazy(() => import('./pages/Settings.jsx'));
-const Viewer = lazy(() => import('./pages/Viewer.jsx'));
+const Files = lazy(() => import('./pages/Files.jsx'));
+const Modules = lazy(() => import('./pages/Modules.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 function RouteErrorBoundary() {
@@ -88,20 +88,12 @@ function PublicOnlyRoute({ children }) {
 const router = createBrowserRouter(
   [
     {
-      path: routes.landing,
-      element: <Landing />
-    },
-    {
       path: routes.login,
       element: (
         <PublicOnlyRoute>
           <Login />
         </PublicOnlyRoute>
       )
-    },
-    {
-      path: routes.viewer(),
-      element: <Viewer />
     },
     {
       path: routes.adminRoot,
@@ -113,26 +105,19 @@ const router = createBrowserRouter(
       errorElement: <RouteErrorBoundary />,
       children: [
         { index: true, element: <Dashboard /> },
+        { path: 'modules', element: <Modules /> },
         { path: 'collections', element: <Collections /> },
         { path: 'collections/:id', element: <CollectionDetail /> },
         { path: 'qrcodes', element: <QRCodes /> },
         { path: 'qrcodes/:id', element: <QRDetail /> },
+        { path: 'files', element: <Files /> },
         { path: 'recycle-bin', element: <RecycleBin /> },
         { path: 'settings', element: <Settings /> }
       ]
     },
-    {
-      path: '*',
-      element: <NotFound />,
-      errorElement: <RouteErrorBoundary />
-    }
+    { path: '*', element: <NotFound />, errorElement: <RouteErrorBoundary /> }
   ],
-  {
-    future: {
-      v7_relativeSplatPath: true,
-      v7_startTransition: true
-    }
-  }
+  { future: { v7_relativeSplatPath: true, v7_startTransition: true } }
 );
 
 createRoot(document.getElementById('root')).render(

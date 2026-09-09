@@ -60,7 +60,7 @@ function handleFrameImageUploadError(err, req, res, next) {
 }
 
 function vaultUrl(token) {
-  return `${env.publicBaseUrl}/vault/${token}`;
+  return `${env.publicBaseUrl.replace(/\/$/, '')}/q/${token}`;
 }
 
 function mapQr(qr) {

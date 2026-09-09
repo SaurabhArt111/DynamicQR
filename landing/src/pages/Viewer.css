@@ -545,3 +545,50 @@
     transition: none;
   }
 }
+
+/* Public viewer polish */
+.viewer-page {
+  animation: viewer-in .45s ease
+}
+
+.viewer-header {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .12)
+}
+
+@keyframes viewer-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+@media(max-width:760px) {
+  .viewer-header {
+    position: sticky;
+    top: 0;
+    z-index: 30
+  }
+
+  .viewer-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20
+  }
+
+  .viewer-stage {
+    padding: 14px 12px 92px
+  }
+
+  .viewer-stage img, .viewer-stage video, .viewer-stage iframe, .viewer-stage object {
+    max-height: 70vh
+  }
+
+  .viewer-switcher {
+    bottom: calc(12px + var(--safe-bottom))
+  }
+}

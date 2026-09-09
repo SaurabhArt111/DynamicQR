@@ -12,7 +12,7 @@ export default function NotFound() {
         <h1>Page not found</h1>
         <p>The page you requested does not exist or has moved to a different route.</p>
         <div className="button-row">
-          <Link className="primary-button" to={routes.landing}>Go to Landing</Link>
+          <a className="primary-button" href={import.meta.env.VITE_PUBLIC_APP_URL || '/'}>Open public site</a>
         </div>
       </section>
     </main>

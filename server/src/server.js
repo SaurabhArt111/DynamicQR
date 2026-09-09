@@ -14,13 +14,15 @@ import recycleRoutes from './routes/recycleRoutes.js';
 import viewerRoutes from './routes/viewerRoutes.js';
 import collectionRoutes from './routes/collectionRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
+import filesRoutes from './routes/filesRoutes.js';
 import { RecycleBin } from './models/RecycleBin.js';
 import { QRCode } from './models/QRCode.js';
 import { errorHandler, notFound } from './middleware/notFound.js';
 
 const app = express();
 const nodeEnv = process.env.NODE_ENV || 'development';
-const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+const clientUrl = process.env.ADMIN_URL || process.env.CLIENT_URL || 'http://localhost:5173';
+const publicUrl = process.env.PUBLIC_URL || process.env.PUBLIC_BASE_URL || 'http://localhost:5174';
 const isBehindProxy = nodeEnv === 'production' || process.env.RENDER === 'true' || Boolean(process.env.RENDER_EXTERNAL_URL);
 
 function toOrigin(url) {
@@ -31,7 +33,7 @@ function toOrigin(url) {
   }
 }
 
-const allowedOrigins = [clientUrl, env.clientUrl, env.publicBaseUrl, 'http://localhost:5173']
+const allowedOrigins = [clientUrl, env.clientUrl, env.adminUrl, publicUrl, env.publicBaseUrl, 'http://localhost:5173', 'http://localhost:5174']
   .filter(Boolean)
   .map(toOrigin)
   .filter((url, index, list) => list.indexOf(url) === index);
@@ -70,8 +72,8 @@ app.get('/health', (req, res) => {
   });
 });
 
-app.get('/vault/:token', (req, res) => {
-  res.redirect(302, `${clientUrl}/vault/${req.params.token}`);
+app.get('/q/:token', (req, res) => {
+  res.redirect(302, `${publicUrl.replace(/\/$/, '')}/q/${req.params.token}`);
 });
 
 app.use('/api/auth', authRoutes);
@@ -81,6 +83,7 @@ app.use('/api/recycle-bin', recycleRoutes);
 app.use('/api/vault', viewerRoutes);
 app.use('/api/collections', collectionRoutes);
 app.use('/api/settings', settingsRoutes);
+app.use('/api/files', filesRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

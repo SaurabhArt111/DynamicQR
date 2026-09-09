@@ -1,9 +1,7 @@
 @echo off
-echo Starting DriftX services on network...
+echo Starting services on network...
 echo.
 echo This will open 3 terminal windows:
-echo   1. server
-echo   3. client
 echo.
 timeout /t 2
 
@@ -12,10 +10,15 @@ cd /d "%~dp0"
 
 REM Start server in new window
 echo Starting server...
-start "server - Overlay Lounge" cmd /k "cd server && npm run dev"
+start "server" cmd /k "cd server && npm run dev"
 timeout /t 2
 
-REM Start Manager client in new window
-echo Starting Manager...
-start "client" cmd /k "cd client && npm run dev"
+REM Start admin in new window
+echo Starting admin...
+start "admin" cmd /k "cd admin && npm run dev"
+timeout /t 2
+
+REM Start landing client in new window
+echo Starting landing...
+start "landing" cmd /k "cd landing && npm run dev"
 timeout /t 2

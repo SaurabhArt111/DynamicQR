@@ -139,7 +139,8 @@ export default function QRDesignStudio({ scope, qr, collection, onClose, onSaved
   const frameImageInputRef = useRef(null);
 
   const previewQrName = isQrScope ? (qr?.name || 'Your QR') : 'Product Name';
-  const previewVaultUrl = isQrScope ? qr?.vaultUrl : `${window.location.origin}/vault/sample-qr-code`;
+  const publicBase = import.meta.env.VITE_PUBLIC_APP_URL || window.location.origin;
+  const previewVaultUrl = isQrScope ? qr?.vaultUrl : `${publicBase.replace(/\/$/, '')}/q/sample-qr-code`;
 
   const [localLogoObjectUrl, setLocalLogoObjectUrl] = useState(null);
   useEffect(() => {

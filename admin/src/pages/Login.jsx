@@ -7,6 +7,7 @@ import { routes } from '../routes/paths.js';
 import './Login.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'DynamicVault QR';
+const publicUrl = import.meta.env.VITE_PUBLIC_APP_URL || '/';
 
 export default function Login() {
   const { login, token } = useAuth();
@@ -60,9 +61,9 @@ export default function Login() {
       </div>
 
       <form className="login-panel" onSubmit={submit}>
-        <Link to={routes.landing} className="login-back-link">
+        <a href={publicUrl} className="login-back-link">
           <ArrowLeft size={14} /> Back to home
-        </Link>
+        </a>
 
         <div className="login-brand">
           <QrCode size={22} />
